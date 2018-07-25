@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class IntForController {
-    private static int counter = 0;
+    private int counter = 0;
 
     @GetMapping("a/intfor")
     public Map<String, String> process() {

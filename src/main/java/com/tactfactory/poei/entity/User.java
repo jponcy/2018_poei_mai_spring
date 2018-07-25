@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "sys_user")
@@ -15,11 +20,20 @@ public class User {
     private Long id;
 
     @Column(name = "id")
+    @NotBlank
     private String username;
+    
+    @NotBlank
+    @Length(min = 8, max = 4321)
     private String password;
+    
     private String lastname;
     private String firstname;
+    
+    @NotBlank
+    @Email
     private String email;
+    
     private String grade;
 
     /**

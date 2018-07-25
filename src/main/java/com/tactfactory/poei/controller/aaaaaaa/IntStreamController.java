@@ -12,16 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class IntStreamController {
-    private static int counter = 0;
+    private int counter = 0;
 
     @GetMapping("a/intstream")
     public Map<String, String> process() {
-        ++ counter;
+        ++ this.counter;
 
-        String value = IntStream.range(0, counter) // Loop.
-                .mapToObj(a -> "a")                // 'a' creations
-                .collect(Collectors.joining(""));  // Concatenation.
-        
+        String value = IntStream
+            .range(0, counter)                  // Loop.
+            .mapToObj(a -> "a")                 // 'a' creations
+            .collect(Collectors.joining(""));   // Concatenation.
+
         return Collections.singletonMap("value", value);
     }
 

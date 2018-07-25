@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class StringVarController {
-    private static String value = "";
+    private String value = "";
     
     @GetMapping("a/string")
     public Map<String, String> process() {
