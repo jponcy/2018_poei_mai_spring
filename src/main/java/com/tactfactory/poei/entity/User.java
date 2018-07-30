@@ -1,15 +1,22 @@
 package com.tactfactory.poei.entity;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "sys_user")
@@ -17,24 +24,35 @@ public class User {
     @Id
     @GeneratedValue
     @Column(name = "user_id")
+    @JsonProperty(access = Access.READ_ONLY)
     private Long id;
 
     @Column(name = "id")
     @NotBlank
     private String username;
-    
+
     @NotBlank
     @Length(min = 8, max = 4321)
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
-    
+
+    @JsonProperty(access = Access.READ_ONLY)
+    private LocalDateTime createdAt = LocalDateTime.now();
+
     private String lastname;
     private String firstname;
-    
+
     @NotBlank
     @Email
     private String email;
-    
+
     private String grade;
+
+    @OneToMany(mappedBy = "author")
+    private List<Book> writeBooks;
+
+    @ManyToMany
+    private List<Book> ownBooks;
 
     /**
      * @return the id
@@ -132,5 +150,13 @@ public class User {
      */
     public final void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

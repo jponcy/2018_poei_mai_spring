@@ -1,0 +1,19 @@
+.cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.cards > * {
+  width: 300px;
+  background-color: silver;
+  border-radius: 25px;
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid black;
+}
+
+.cards strong {
+  color: red;
+  font-weight: bolder;
+}
